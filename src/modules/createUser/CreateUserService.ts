@@ -1,11 +1,7 @@
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../../repositories/IUsersRepositories";
 
-interface IUserRequest {
-  name: string;
-  username: string;
-  email: string;
-}
+import { IUserRequest } from './CreateUserDTO';
 
 class CreateUserService {
   constructor(private usersRepository: IUsersRepository) {}

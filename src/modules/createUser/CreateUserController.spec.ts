@@ -13,9 +13,23 @@ describe("Create User Controller", () => {
             name: 'Test Integration'
         });
 
-        console.log(response.body);
-
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty('id');
+    });
+
+    it("should not be able to create an existing user", async () => {
+        await request(app).post('/users').send({
+            username: 'test-integration-exist',
+            email: 'testIntegrationExist@test.com.br',
+            name: 'Test Integration Exist User'
+        });
+        
+        const response = await request(app).post('/users').send({
+            username: 'test-integration-exist',
+            email: 'testIntegrationExist@test.com.br',
+            name: 'Test Integration Exist User'
+        });
+
+        expect(response.status).toBe(400);
     });
 });
